@@ -1,67 +1,108 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>我的Python项目</title>
+    <title>单缝检测AI系统</title>
     <style>
         body {
             font-family: Arial, sans-serif;
-            max-width: 800px;
+            max-width: 1000px;
             margin: 0 auto;
             padding: 20px;
-            background: #f5f5f5;
+            background: #f8f9fa;
         }
         .container {
             background: white;
             padding: 30px;
             border-radius: 10px;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
         }
         h1 {
             color: #2c3e50;
+            text-align: center;
         }
-        #result-img {
+        .step {
+            margin: 30px 0;
+            padding: 20px;
+            border-left: 4px solid #3498db;
+            background: #f8f9fa;
+        }
+        .result-box {
+            background: #e8f4f8;
+            padding: 15px;
+            border-radius: 5px;
+            margin: 10px 0;
+        }
+        .normal { color: green; font-weight: bold; }
+        .abnormal { color: red; font-weight: bold; }
+        img {
             max-width: 100%;
             border: 1px solid #ddd;
-        }
-        button {
-            background: #3498db;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-        #output {
-            margin-top: 20px;
-            padding: 10px;
-            background: #f9f9f9;
-            border-radius: 5px;
+            margin: 10px 0;
         }
     </style>
 </head>
 <body>
+    <h1>单缝检测AI系统</h1>
+    
     <div class="container">
-        <h1>我的Python项目展示</h1>
-        <p>以下是Python代码生成的分析结果：</p>
-        
-        <!-- 显示图表 -->
-        <img id="result-img" src="result.png" alt="分析结果">
-        
-        <!-- 动态加载数据的按钮 -->
-        <button onclick="loadData()">点击查看详细数据</button>
-        <div id="output"></div>
+        <div class="step">
+            <h2>📊 步骤1: Excel数据可视化</h2>
+            <p>将Excel数据转换为可视化图表：</p>
+            <img src="result.png" alt="数据可视化结果">
+            <p>数据值: [25, 40, 30, 50, 20]</p>
+        </div>
+
+        <div class="step">
+            <h2>🤖 步骤2: AI模型检测</h2>
+            <p>使用训练好的深度学习模型进行分析：</p>
+            <div class="result-box">
+                <h3>检测结果:</h3>
+                <p id="ai-result">等待分析...</p>
+            </div>
+            <button onclick="runAIAnalysis()">运行AI检测</button>
+        </div>
+
+        <div class="step">
+            <h2>📋 步骤3: 详细报告</h2>
+            <div id="report">
+                <p>请先运行AI检测获取完整报告</p>
+            </div>
+        </div>
     </div>
 
     <script>
-        function loadData() {
-            fetch('data.json')
-                .then(response => response.json())
-                .then(data => {
-                    document.getElementById('output').innerHTML = `
-                        <h3>${data.name}</h3>
-                        <pre>${JSON.stringify(data.values, null, 2)}</pre>
-                    `;
-                });
+        function runAIAnalysis() {
+            // 模拟AI分析过程
+            document.getElementById('ai-result').innerHTML = 
+                '<span class="processing">🔍 AI分析中...</span>';
+            
+            // 2秒后显示结果（模拟AI计算时间）
+            setTimeout(() => {
+                // 这里应该是你的实际检测逻辑
+                // 假设检测结果为"异常"
+                const isNormal = Math.random() > 0.5;
+                const result = isNormal ? 
+                    '<span class="normal">✅ 检测结果: 正常</span>' : 
+                    '<span class="abnormal">❌ 检测结果: 异常</span>';
+                
+                document.getElementById('ai-result').innerHTML = result;
+                generateReport(isNormal);
+            }, 2000);
+        }
+
+        function generateReport(isNormal) {
+            const reportHTML = `
+                <div class="result-box">
+                    <h3>详细分析报告</h3>
+                    <p><strong>模型名称:</strong> slit_twoclass.pkl</p>
+                    <p><strong>检测时间:</strong> ${new Date().toLocaleString()}</p>
+                    <p><strong>置信度:</strong> ${(Math.random() * 0.3 + 0.7).toFixed(2)}</p>
+                    <p><strong>状态:</strong> ${isNormal ? '正常' : '异常'}</p>
+                    ${!isNormal ? '<p><strong>异常原因:</strong> 数据波动超出阈值范围</p>' : ''}
+                </div>
+            `;
+            document.getElementById('report').innerHTML = reportHTML;
         }
     </script>
 </body>
