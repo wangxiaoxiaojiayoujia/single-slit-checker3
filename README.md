@@ -1,12 +1,17 @@
-# single-slit-checker3
-AI-based single-slit diffraction experiment validator
-# AI 单缝衍射检测仪
+# 🔬 AI 单缝衍射检测仪
 
-上传峰值图 → 一键判断是否正常！
+基于人工智能的单缝衍射实验验证系统，自动分析实验数据并判断衍射图案是否正常。
 
-## 一键运行
+## ✨ 功能特性
+
+- 📊 Excel 数据自动解析与可视化
+- 🤖 AI 智能分类（正常/异常衍射）
+- 📈 高质量衍射曲线生成
+- 🎯 置信度评分系统
+- ⚡ 一键式批量处理
+
+## 🚀 快速开始
+
+### 环境安装
 ```bash
 pip install -r requirements.txt
-python main.py --make-dataset
-python main.py --train
-python main.py --predict
